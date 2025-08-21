@@ -1,0 +1,33 @@
+server:
+  port: ${ERIC_TOKEN_SERVICE_PORT:8081}
+  shutdown: graceful
+
+########## iam setting ############
+iam:
+  tls-enable: ${KEYCLOAK_TLS_ENABLE:enabled}
+  host: ${KEYCLOAK_HOST:localhost}
+  port: ${KEYCLOAK_PORT:8444}
+  client-realm: ${KEYCLOAK_CLIENT_REALM:oam}
+  client-id: ${KEYCLOAK_CLIENT_ID:admin-portal}
+  client-cert: ${KEYCLOAK_CLIENT_CERT}
+  client-trust-ca: ${KEYCLOAK_TRUST_CA}
+  root-path: ${IAM_ROOT_PATH:/auth/realms/${iam.client-realm}/protocol/openid-connect}
+
+#logging:
+#  level:
+#    com.vincent.learning: ${LOG_LEVEL:INFO}
+#    reactor:
+#      netty:
+#        http:
+#          client:
+#            HttpClient: ${LOG_LEVEL:INFO}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+spring:
+  main:
+    banner-mode: off

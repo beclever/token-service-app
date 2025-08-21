@@ -1,0 +1,16 @@
+########## iam setting ############
+iam:
+  tls-enable: false
+  host: localhost
+  port: 31000
+  client-realm: oam
+  client-id: admin-portal
+  client-cert:
+  client-trust-ca:
+  root-path: /auth/realms/${iam.client-realm}/protocol/openid-connect
+
+
+logging:
+  level:
+    com.vincent.learning: DEBUG
+

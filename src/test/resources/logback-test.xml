@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <conversionRule conversionWord="processId" converterClass="com.vincent.nef.logback.ProcessIdConverter"/>
+    <contextListener class="com.vincent.nef.logback.NefLogbackListener">
+        <appRoot/>
+        <containerName>eric-ngac-iam-token</containerName>
+        <logControlPath>/etc/cces/logControl.json</logControlPath>
+        <checkIntervalMillis>1000</checkIntervalMillis>
+    </contextListener>
+    <appender name="STDOUT_JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {"version": "1.2.0", "timestamp": "%date{\"yyyy-MM-dd'T'HH:mm:ss.SSSXXX\"}", "severity": "%p", "service_id": "eric-ngac-iam-token", "message": "%logger{36} -  %replace(%m){'\n','|'} %xEx", "metadata": {"function": "CCES", "category": "serverlog", "proc_id": "%-6processId"}}
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <logger name="com.vincent.learning" level="DEBUG"/>
+    <logger name="reactor.netty.http.client.HttpClient" level="DEBUG"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT_JSON"/>
+    </root>
+    #The following line hope can be remove after CM-revisit
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+</configuration>

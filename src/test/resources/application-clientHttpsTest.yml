@@ -1,0 +1,27 @@
+########## iam setting ############
+iam:
+  tls-enable: enabled
+  host: localhost
+  port: 8844
+  client-realm: oam
+  client-id: admin-portal
+  client-cert: src/test/resources/client-public-test.crt,src/test/resources/client-private-test.key
+  client-trust-ca: src/test/resources/server-public-key.pem
+  root-path: /auth/realms/${iam.client-realm}/protocol/openid-connect
+
+spring:
+  http:
+    log-request-details: true
+logging:
+  level:
+    com.vincent.learning: DEBUG
+    reactor:
+      netty:
+        http:
+          client:
+            HttpClient: DEBUG
+
+    com:
+      github:
+        tomakehurst: DEBUG
+
